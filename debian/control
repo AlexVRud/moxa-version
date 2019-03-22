@@ -10,6 +10,8 @@ Package: moxa-version
 Architecture: linux-any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
+Replaces: uc2100-base-system (= 1.4.0)
+Breaks: uc2100-base-system (= 1.4.0)
 Description: Moxa version utility
  This package provide an utility for getting Moxa device's
  modelname, firmware version, and builddate. It replaces the
