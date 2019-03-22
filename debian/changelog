@@ -1,3 +1,9 @@
+moxa-version (1.0.1) stretch; urgency=low
+
+  * fix: break mx-ver in uc2100-base-system
+
+ -- Ken CJ Chou <KenCJ.Chou@moxa.com>  Fri, 22 Mar 2019 16:29:51 +0800
+
 moxa-version (1.0.0) stretch; urgency=low
 
   * Initial Release.
