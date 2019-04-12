@@ -1,0 +1,5 @@
+# mx-ver gets information from u-boot, it needs set-uid
+moxa-version: setuid-binary bin/mx-ver 4755 root/root
+
+# manpage is not needed for this utility
+moxa-version: binary-without-manpage bin/mx-ver
