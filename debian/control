@@ -2,6 +2,7 @@ Source: moxa-version
 Section: utils
 Priority: optional
 Maintainer: Ken CJ Chou <KenCJ.Chou@moxa.com>
+Uploaders: Remus TY Wu <RemusTY.Wu@moxa.com>
 Build-Depends: debhelper (>= 10)
 Standards-Version: 4.1.2
 Homepage: https://www.moxa.com/
