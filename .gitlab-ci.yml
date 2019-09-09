@@ -60,6 +60,7 @@ prepare_develop_debs:
         - stretch-develop
     dependencies:
         - develop_build
+    when: manual
     script:
         - mkdir -p /cache/stretch/develop/
         - cp *.deb /cache/stretch/develop/
@@ -74,6 +75,7 @@ prepare_release_debs:
         - stretch
     dependencies:
         - release_build
+    when: manual
     script:
         - mkdir -p /cache/stretch/release/
         - cp *.deb /cache/stretch/release/
