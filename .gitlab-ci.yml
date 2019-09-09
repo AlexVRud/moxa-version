@@ -17,12 +17,17 @@ develop_build:
     script:
         - dpkg --add-architecture armhf
         - dpkg --add-architecture arm64
+        - dpkg --add-architecture amd64
         - echo "deb http://mil-internal-apt:8080/mirror-stretch_20190731 stretch main contrib non-free" > /etc/apt/sources.list
         - curl -fsSL http://mil-internal-apt:8080/mil_internal_apt.gpg | apt-key add -
         - apt-get update
-        - apt-get install crossbuild-essential-armhf crossbuild-essential-arm64 libc6-dev:armhf libc6-dev:arm64 -y --allow-unauthenticated
+        - apt-get install --allow-unauthenticated -y
+          crossbuild-essential-armhf libc6-dev:armhf
+          crossbuild-essential-arm64 libc6-dev:arm64
+          build-essential:amd64 libc6-dev:amd64
         - dpkg-buildpackage -us -uc -b -aarmhf
         - dpkg-buildpackage -us -uc -b -aarm64
+        - dpkg-buildpackage -us -uc -b -aamd64
         - mv ../*.deb .
     artifacts:
         name: "${CI_PROJECT_NAME}"
@@ -39,12 +44,17 @@ release_build:
     script:
         - dpkg --add-architecture armhf
         - dpkg --add-architecture arm64
+        - dpkg --add-architecture amd64
         - echo "deb http://mil-internal-apt:8080/mirror-stretch_20190731 stretch main contrib non-free" > /etc/apt/sources.list
         - curl -fsSL http://mil-internal-apt:8080/mil_internal_apt.gpg | apt-key add -
         - apt-get update
-        - apt-get install crossbuild-essential-armhf crossbuild-essential-arm64 libc6-dev:armhf libc6-dev:arm64 -y --allow-unauthenticated
+        - apt-get install --allow-unauthenticated -y
+          crossbuild-essential-armhf libc6-dev:armhf
+          crossbuild-essential-arm64 libc6-dev:arm64
+          build-essential:amd64 libc6-dev:amd64
         - dpkg-buildpackage -us -uc -b -aarmhf
         - dpkg-buildpackage -us -uc -b -aarm64
+        - dpkg-buildpackage -us -uc -b -aamd64
         - mv ../*.deb .
     artifacts:
         name: "${CI_PROJECT_NAME}"
@@ -60,6 +70,7 @@ prepare_develop_debs:
         - stretch-develop
     dependencies:
         - develop_build
+    when: manual
     script:
         - mkdir -p /cache/stretch/develop/
         - cp *.deb /cache/stretch/develop/
@@ -74,6 +85,7 @@ prepare_release_debs:
         - stretch
     dependencies:
         - release_build
+    when: manual
     script:
         - mkdir -p /cache/stretch/release/
         - cp *.deb /cache/stretch/release/
