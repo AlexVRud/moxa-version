@@ -15,8 +15,8 @@ all: mx-ver.o
 		$<
 
 install:
-	mkdir -p $(DESTDIR)/bin/
-	cp mx-ver $(DESTDIR)/bin/
+	/usr/bin/install -d $(DESTDIR)/bin
+	/usr/bin/install mx-ver $(DESTDIR)/bin/mx-ver
 
 clean:
 	rm -f *.o mx-ver

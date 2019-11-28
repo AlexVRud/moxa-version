@@ -9,7 +9,11 @@
 #define BUFFSIZE 256
 #define CONFIG_FILE "/etc/moxa-configs/moxa-version.conf"
 
+#ifdef __x86_64__
+#define DMI_VAR_BOARD_NAME "board_name"
+#else
 #define UBOOT_VAR_MODELNAME "modelname"
+#endif
 #define CONFIG_VAR_FW_VERSION "FW_VERSION"
 #define CONFIG_VAR_BUILDDATE "BUILDDATE"
 
@@ -48,6 +52,19 @@ static int exec_shell(const char *cmd, char *output)
 	}
 }
 
+#ifdef __x86_64__
+static int get_dmi_env_var(const char *varname, char *output)
+{
+	char cmd[BUFFSIZE] = {0};
+
+	sprintf(cmd, "cat /sys/class/dmi/id/%s", varname);
+	if (exec_shell(cmd, output) < 0)
+		return -1;
+
+	output[strcspn(output, "\n")] = 0;
+	return 0;
+}
+#else
 static int get_uboot_env_var(const char *varname, char *output)
 {
 	char cmd[BUFFSIZE] = {0};
@@ -59,6 +76,7 @@ static int get_uboot_env_var(const char *varname, char *output)
 	output[strcspn(output, "\n")] = 0;
 	return 0;
 }
+#endif
 
 static int find_var_in_file(FILE *fp, const char *varname, char *output)
 {
@@ -111,7 +129,11 @@ int main(int argc, char *argv[])
 	}
 
 	if (argc == 1 || !strcmp(argv[1], "-a")) {
-		if (get_uboot_env_var(UBOOT_VAR_MODELNAME, buff) < 0) 
+#ifdef __x86_64__
+		if (get_dmi_env_var(DMI_VAR_BOARD_NAME, buff) < 0)
+#else
+		if (get_uboot_env_var(UBOOT_VAR_MODELNAME, buff) < 0)
+#endif
 			return 1;
 		if (get_var_from_config(CONFIG_VAR_FW_VERSION, tmp) < 0) 
 			return 1;
@@ -125,7 +147,11 @@ int main(int argc, char *argv[])
 		if (get_var_from_config(CONFIG_VAR_BUILDDATE, buff) < 0) 
 			return 1;
 	} else if (!strcmp(argv[1], "-m")) {
-		if (get_uboot_env_var(UBOOT_VAR_MODELNAME, buff) < 0) 
+#ifdef __x86_64__
+		if (get_dmi_env_var(DMI_VAR_BOARD_NAME, buff) < 0)
+#else
+		if (get_uboot_env_var(UBOOT_VAR_MODELNAME, buff) < 0)
+#endif
 			return 1;
 	} else if (!strcmp(argv[1], "-v")) {
 		if (get_var_from_config(CONFIG_VAR_FW_VERSION, buff) < 0) 

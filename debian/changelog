@@ -1,3 +1,10 @@
+moxa-version (1.1.0+deb9) stretch; urgency=low
+
+  * feat: add x86 board_name support
+  * feat: install target with command 'install'
+
+ -- Remus TY Wu <RemusTY.Wu@moxa.com>  Mon, 09 Sep 2019 15:34:32 +0800
+
 moxa-version (1.0.1) stretch; urgency=low
 
   * fix: break mx-ver in uc2100-base-system
