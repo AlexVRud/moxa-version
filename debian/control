@@ -1,0 +1,19 @@
+Source: moxa-version
+Section: utils
+Priority: optional
+Maintainer: Ken CJ Chou <KenCJ.Chou@moxa.com>
+Uploaders: Elvis Yao <ElvisCW.Yao@moxa.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: https://www.moxa.com/
+
+Package: moxa-version
+Architecture: linux-any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Replaces: uc2100-base-system (<< 1.6.0)
+Breaks: uc2100-base-system (<< 1.6.0)
+Description: Moxa version utility
+ This package provides an utility for getting Moxa device's
+ modelname, firmware version, and builddate. It replaces the
+ old utility named `kversion`.
