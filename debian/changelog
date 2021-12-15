@@ -1,3 +1,9 @@
+moxa-version (1.1.0+deb11) UNRELEASED; urgency=medium
+
+  * Update to Debian 11
+
+ -- Alexander Rudalev <a.rudalev@ens.ru>  Wed, 15 Dec 2021 11:31:33 +0300
+
 moxa-version (1.1.0+deb10) buster; urgency=low
 
   * Initial Release.

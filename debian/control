@@ -2,9 +2,10 @@ Source: moxa-version
 Section: utils
 Priority: optional
 Maintainer: Ken CJ Chou <KenCJ.Chou@moxa.com>
-Uploaders: Elvis Yao <ElvisCW.Yao@moxa.com>
+Uploaders: Elvis Yao <ElvisCW.Yao@moxa.com>,
+           Alexander Rudalev <a.rudalev@ens.ru>
 Build-Depends: debhelper (>= 10)
-Standards-Version: 4.1.2
+Standards-Version: 4.5.1
 Homepage: https://www.moxa.com/
 
 Package: moxa-version
